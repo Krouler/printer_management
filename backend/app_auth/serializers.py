@@ -6,6 +6,7 @@ from rest_framework.serializers import ModelSerializer
 class RegistrationSerializer(ModelSerializer):
 
     password = serializers.CharField(write_only=True)
+    email = serializers.CharField(required=True)
 
     def create(self, validated_data):
         user = User.objects.create_user(
