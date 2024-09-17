@@ -34,7 +34,10 @@ class AbstractPrinter(models.Model):
     #                             verbose_name='Кабинет', on_delete=models.SET_NULL)
     manufacturer = models.CharField(max_length=50, null=False, blank=False, verbose_name='Производитель')
     model = models.CharField(max_length=100, null=False, blank=False, verbose_name='Модель принтера')
-    local_name = models.CharField(max_length=100, null=False, blank=False, verbose_name='Локальное имя принтера')
+    local_name = models.CharField(max_length=100, null=True, blank=True, verbose_name='Локальное имя принтера')
+
+    def __str__(self):
+        return f'{self.manufacturer} {self.model}'
 
     class Meta:
         abstract = True

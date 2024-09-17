@@ -1,0 +1,9 @@
+.self_page__container {
+    width: 100%;
+    min-height: 90%;
+    border-radius: 0;
+}
+
+.profile__change {
+    background-color: rgb(12, 34, 34);
+}

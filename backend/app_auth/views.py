@@ -1,6 +1,8 @@
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from rest_framework import mixins, status
+from rest_framework import mixins, status, views
 from rest_framework.generics import CreateAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
@@ -19,7 +21,7 @@ class UserViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.Updat
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
-        is_stuff = serializer.validated_data['is_staff']
+        is_stuff = serializer.validated_data.get('is_staff')
         if is_stuff != instance.is_staff and is_stuff is not None and not request.user.is_admin:
             err_obj = {'detail': 'No permission to change staff option'}
             return Response(data=err_obj, status=status.HTTP_403_FORBIDDEN)
@@ -37,4 +39,13 @@ class RegistrationApiView(CreateAPIView):
     model = User
     permission_classes = (NotAuthed,)
     serializer_class = RegistrationSerializer
+
+
+class RetrieveSelfInfo(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, GenericViewSet):
+    model = User
+    permission_classes = (IsAuthenticated,)
+    serializer_class = GetUserSerializer
+
+    def get_object(self):
+        return self.request.user
 

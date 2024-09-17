@@ -13,5 +13,3 @@ class NotAuthed(BasePermission):
     def has_permission(self, request, view):
         return not request.user.is_authenticated
 
-    def has_object_permission(self, request, view, obj):
-        return self.has_permission(request, view)

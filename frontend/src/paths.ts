@@ -1,0 +1,15 @@
+export const Paths = {
+    home: '/',
+    me: '/me',
+    meUpdate: '/me/update',
+    address_list: '/address/list',
+    address_create: '/address/create',
+    cabinet_list: '/cabinet/list',
+    cabinets_create: '/cabinet/create',
+    printer_list: '/printer/list',
+    printer_create: '/printer/create',
+    cartridge_list: '/cartridge/list',
+    cartridge_create: '/cartridge/create',
+    register: '/register',
+    login: '/login',
+} as const;

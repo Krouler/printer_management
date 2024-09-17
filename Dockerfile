@@ -17,11 +17,13 @@ RUN apk update && \
     pip install wheel && \
     pip install -r requirements.txt
 
+RUN mkdir -p /vol/static
+RUN mkdir -p /vol/media
+
 COPY ./run.sh .
 RUN chmod +x /printer_app/run.sh
 
 COPY . .
 
 ENTRYPOINT ["/bin/sh", "/printer_app/run.sh"]
-
 

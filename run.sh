@@ -7,4 +7,6 @@ echo 'Started'
 echo 'Manage.py migrate...'
 cd backend
 python3 manage.py migrate
+echo 'Collecting static...'
+python3 manage.py collectstatic
 exec "$@"
